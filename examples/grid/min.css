@@ -1,0 +1,51 @@
+.row {
+  margin: 1% 0;
+  overflow: auto;
+  /* required - without this, the page layout is screwed up */
+}
+.col {
+  float: left;
+  box-sizing: border-box;
+}
+.table, .one {
+  width: 100%;
+}
+.eleven.twelfths {
+  width: 91.66%;
+}
+.ten.twelfths, .five.sixths {
+  width: 83.33%;
+}
+.three.quarters, .six.eighths, .nine.twelfths {
+  width: 75%;
+}
+.two.thirds, .four.sixths, .eight.twelfths {
+  width: 66.66%;
+}
+.seven.twelfths {
+  width: 58.33%;
+}
+.one.half, .six.twelfths, .two.halves, .three.sixths, .two.quarters {
+  width: 50%;
+}
+.five.twelfths {
+  width: 41.66%;
+}
+.one.third, .four.twelfths {
+  width: 33.33%;
+}
+.one.quarter, .three.twelfths {
+  width: 25%;
+}
+.one.sixth, .two.twelfths {
+  width: 16.66%;
+}
+.one.twelfth {
+  width: 8.33%;
+}
+/* For smaller screens, change all columns to 100% width */
+@media (max-width: 870px) {
+  .row .col {
+    width: 100%;
+  }
+}
