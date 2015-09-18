@@ -8,19 +8,19 @@ class Person
     end
 
     def fullname
-      "#{first_name} #{last_name}"
+      "#{first_name.capitalize} #{last_name.capitalize}"
     end
 end
 
 class Doctor < Person
   def fullname
-    "Dr. #{first_name} #{last_name}"
+    "Dr. #{first_name.capitalize} #{last_name.capitalize}"
   end
 end
 
 class Lawyer < Person
   def fullname
-    "#{first_name} #{last_name}, Esq."
+    "#{first_name.capitalize} #{last_name.capitalize}, Esq."
   end
 end
 
