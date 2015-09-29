@@ -13,7 +13,6 @@ class CreateTables < ActiveRecord::Migration
     end
 
     create_table :reviews do |t|
-      t.references :movie
       t.string :title
       t.string :description
       t.decimal :rating
