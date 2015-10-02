@@ -11,6 +11,8 @@ gem 'sinatra-activerecord'
 gem 'puma'
 gem 'tux'
 
+gem 'bcrypt-ruby', '3.1.2'
+
 group :development, :test do
   gem 'pry'
   gem 'shotgun'

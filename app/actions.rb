@@ -25,7 +25,7 @@ post '/login' do
 
   user = User.find_by(:email => email)
 
-  if user && user.password == password
+  if user && user.authenticate(password)
     session[:user_id] = user.id
     redirect '/'
   else
@@ -46,13 +46,19 @@ post '/signup' do
   username = params[:username]
   email = params[:email]
   password = params[:password]
+  password_confirmation = params[:password_confirmation]
 
   user = User.find_by(:email => email)
 
   if user
     redirect '/signup'
   else
-    user = User.create(:username => username, :email => email, :password => password)
+    user = User.create(
+      :username => username,
+      :email => email,
+      :password => password)
+      # :password_confirmation => password_confirmation)
+
     session[:user_id] = user.id
     redirect '/'
   end
