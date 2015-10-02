@@ -8,7 +8,7 @@ class CreateTables < ActiveRecord::Migration
     end
 
     create_table :movies do |t|
-      t.string :name
+      t.string :title
       t.timestamps
     end
 

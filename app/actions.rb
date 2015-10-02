@@ -4,6 +4,13 @@ helpers do
   end
 end
 
+before do
+  pass if request.path_info == "/login"
+  pass if request.path_info == "/signup"
+
+  redirect '/login' unless current_user
+end
+
 get '/' do
   erb :index
 end
@@ -51,13 +58,35 @@ post '/signup' do
   end
 end
 
-get '/profile/:id' do
-  if params[:id]
-    user_id = params[:id]
-  else
-    user_id = session[:user_id]
-  end
-
-  @user = User.find(user_id)
+get '/profile' do
+  @user = User.find(session[:user_id])
   erb :profile
+end
+
+get '/profile/:id' do
+  @user = User.find(params[:id])
+  erb :profile
+end
+
+get '/movies/new' do
+  erb :new_movie
+end
+
+get '/movies' do
+  @movies = Movie.where(:user_id => current_user.id)
+  erb :movies
+end
+
+post '/movies' do
+  title = params[:title]
+
+  movie = Movie.find_by(:title => title)
+
+  if movie
+    redirect '/movies/new'
+  else
+    current_user.movies.create(:title => title)
+
+    redirect '/movies'
+  end
 end
