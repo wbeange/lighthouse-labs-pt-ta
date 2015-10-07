@@ -1,0 +1,16 @@
+<div>Title: <%= @movie.title %></div>
+<!-- <div>Owner: <%= @movie.user.email %></div> -->
+
+<div style="padding-top: 10px;">
+  <% if @reviews.length == 0 %>
+    <div>No rewiews</div>
+  <% end %>
+
+  <% if @reviews.length > 0 %>
+    <div>Reviews:</div>
+
+    <% @reviews.each do |review| %>
+    <div>&#45; <%= review.title %> gets <%= review.rating %> stars: <%= review.description %> </div>
+    <% end %>
+  <% end %>
+</div>

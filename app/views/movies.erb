@@ -1,6 +1,6 @@
 <div>Movies:</div>
 <% @movies.each do |movie| %>
-<div>&#45; <%= movie.title %></div>
+<div>&#45; <a href=<%= "/movies/#{movie.id}"%>><%= movie.title %></div>
 <% end %>
 
 <form style="padding-top:10px;">
