@@ -1,6 +1,9 @@
 .body-block {
-  width: 300px;
+  width: 500px;
 }
+
+.body-block label { margin-top: 5px; }
+.body-block input { margin-top: 5px; }
 
 .new-form {
   margin: 10px;

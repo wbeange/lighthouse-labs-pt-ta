@@ -1,5 +1,9 @@
 <div class="body-block">
-  <form name="signup_form" class="new-form" method="POST" action="/signup">
+  <div>
+    <a href="/login">Login</a>
+  </div>
+
+  <form name="form" class="new-form" method="POST" action="/users">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required="required" />
     <br/>
@@ -11,10 +15,6 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required="required" />
     <br/>
-
-    <!-- <label for="password_confirmation">Password Confirmation:</label>
-    <input type="password" id="password_confirmation" name="password_confirmation" required="required" />
-    <br/> -->
 
     <input type="submit" value="Submit" />
   </form>

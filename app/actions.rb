@@ -5,8 +5,10 @@ helpers do
 end
 
 before do
-  pass if request.path_info == "/login"
-  pass if request.path_info == "/signup"
+  pass if request.path_info == '/login' && request.request_method == 'GET'
+  pass if request.path_info == '/login' && request.request_method == 'POST'
+  pass if request.path_info == '/users/new' && request.request_method == 'GET'
+  pass if request.path_info == '/users' && request.request_method == 'POST'
 
   redirect '/login' unless current_user
 end
@@ -20,7 +22,7 @@ get '/login' do
 end
 
 post '/login' do
-  email = params[:email]
+  email = params[:email].downcase
   password = params[:password]
 
   user = User.find_by(:email => email)
@@ -38,44 +40,37 @@ post '/logout' do
   redirect '/login'
 end
 
-get '/signup' do
-  erb :signup
+get '/users/new' do
+  erb :user_new
 end
 
-post '/signup' do
+post '/users' do
   username = params[:username]
-  email = params[:email]
+  email = params[:email].downcase
   password = params[:password]
-  password_confirmation = params[:password_confirmation]
 
-  user = User.find_by(:email => email)
+  # halt 400, "Email can't be blank" if email.blank?
+  # halt 409, "Email already exists" if User.exists?(:email => email)
 
-  if user
-    redirect '/signup'
-  else
-    user = User.create(
-      :username => username,
-      :email => email,
-      :password => password)
-      # :password_confirmation => password_confirmation)
+  user = User.create(:username => username, :email => email, :password => password)
 
-    session[:user_id] = user.id
-    redirect '/'
-  end
+  halt 400, user.errors.full_messages.join(',') unless user.valid?
+
+  redirect '/login'
 end
 
-get '/profile' do
+get '/users/self' do
   @user = User.find(session[:user_id])
-  erb :profile
+  erb :user
 end
 
-get '/profile/:id' do
+get '/users/:id' do
   @user = User.find(params[:id])
-  erb :profile
+  erb :user
 end
 
 get '/movies/new' do
-  erb :new_movie
+  erb :movie_new
 end
 
 get '/movies' do
@@ -84,15 +79,9 @@ get '/movies' do
 end
 
 post '/movies' do
-  title = params[:title]
+  movie = current_user.movies.create(:title => params[:title])
 
-  movie = Movie.find_by(:title => title)
+  halt 400, movie.errors.full_messages.join(',') unless movie.valid?
 
-  if movie
-    redirect '/movies/new'
-  else
-    current_user.movies.create(:title => title)
-
-    redirect '/movies'
-  end
+  redirect '/movies'
 end
