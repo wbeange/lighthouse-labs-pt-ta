@@ -1,5 +1,5 @@
-# lighthouse-labs-ta
-work done as a lighthouse lab mentor
+# lighthouse-labs-pt-ta
+Lighthouse Labs - Part Time Course - Mentoring
 
 Sinatra
 =============
